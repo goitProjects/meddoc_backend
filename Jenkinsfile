@@ -36,7 +36,7 @@ node("nodejs"){
     
     stage('Clone Git Repo') {
         catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-            git branch: 'main', credentialsId: 'github-goitProjects', url: 'git@github.com:goitProjects/meddoc_backend.git'
+            git branch: 'main', credentialsId: 'pasha-goitacad-ssh', url: 'git@github.com:goitProjects/meddoc_backend.git'
         }
     }
         
