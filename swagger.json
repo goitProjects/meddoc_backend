@@ -11,16 +11,36 @@
   },
   "servers": [
     {
-      "url": "https://project-pets-api.herokuapp.com/"
+      "url": "http://localhost:3007"
     },
     {
-      "url": "http://localhost:3007"
+      "url": "https://YOU_SERVER.com/"
     }
   ],
   "tags": [
     {
       "name": "UserAuth",
-      "description": "Authorization and info endpoints"
+      "description": "Authorization  endpoints"
+    },
+    {
+      "name": "UserInfo",
+      "description": "Info endpoints"
+    },
+    {
+      "name": "Experience",
+      "description": "Experience endpoints"
+    },
+    {
+      "name": "Appointment",
+      "description": "Appointment endpoints"
+    },
+    {
+      "name": "Colleague",
+      "description": "Colleague endpoints"
+    },
+    {
+      "name": "Analyze",
+      "description": "Colleague endpoints"
     },
     {
       "name": "Notice",
@@ -190,12 +210,49 @@
         }
       }
     },
+    "/info": {
+      "get": {
+        "tags": [
+          "UserInfo"
+        ],
+        "summary": "Get current user  info",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserInfo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
     "/info/{id}": {
       "get": {
         "tags": [
-          "UserAuth"
+          "UserInfo"
         ],
-        "summary": "Get current user info",
+        "summary": "Get user {id} info",
         "parameters": [
           {
             "in": "path",
@@ -235,24 +292,20 @@
         }
       }
     },
-    "/user/update": {
-      "patch": {
+    "/info/all/{role}": {
+      "get": {
         "tags": [
-          "UserAuth"
+          "UserInfo"
         ],
-        "summary": "Update user info",
-        "parameters": [],
-        "requestBody": {
-          "description": "Update's object",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateUserRequest"
-              }
-            }
+        "summary": "Get all users {role} ",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "role",
+            "required": true,
+            "description": "The Notice role"
           }
-        },
+        ],
         "security": [
           {
             "Bearer": []
@@ -264,7 +317,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateUserResponse"
+                  "$ref": "#/components/schemas/GetUsersRole"
                 }
               }
             }
@@ -284,13 +337,186 @@
         }
       }
     },
-    "/notice/category": {
+    "/info/update/image": {
+      "put": {
+        "tags": [
+          "UserInfo"
+        ],
+        "requestBody": {
+          "description": "Update's object",
+          "required": true,
+          "content": {
+            "multipart/form-data:": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userImgUrl": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Update user image info",
+        "responses": {
+        }
+      }
+    },
+    "/info/update": {
+      "patch": {
+        "tags": [
+          "UserInfo"
+        ],
+        "summary": "Update user info",
+        "parameters": [],
+        "requestBody": {
+          "description": "Update's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetUserInfo"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserInfo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/experience": {
       "get": {
         "tags": [
-          "Notice"
+          "Experience"
         ],
-        "summary": "Get list of categories",
+        "summary": "Get current doctor list of Experience",
         "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllExperience"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Experience"
+        ],
+        "summary": "create user experience",
+        "parameters": [],
+        "requestBody": {
+          "description": "Update's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCurrentUserExperienceRequest"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateCurrentUserExperienceResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/experience/{id}": {
+      "get": {
+        "tags": [
+          "Experience"
+        ],
+        "summary": "Get {id} doctor list of Experience",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -298,6 +524,656 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetAllNotice"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Experience"
+        ],
+        "summary": "Update user experience",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "Update's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCurrentUserExperienceRequest"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateCurrentUserExperienceResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Experience"
+        ],
+        "summary": "delete {id} from list of Experience",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllNotice"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/experience/update/image/{id}": {
+      "put": {
+        "tags": [
+          "Experience"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "Update's object",
+          "required": true,
+          "content": {
+            "multipart/form-data:": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fileName": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Update by {id} Experience image ",
+        "responses": {
+        }
+      }
+    },
+    "/appointment": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Get one notice",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAppointments"
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Get one notice",
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAppointmentReq"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddAppointmentRes"
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/appointment/{id}": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Get one notice",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The Notice ID"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAppointment"
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "update one Appointment by {id}",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The Appointment ID"
+          }
+        ],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAppointmentReq"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddAppointmentRes"
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "delete Appointment {id}",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "delete Appointment {id}"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/colleague": {
+      "get": {
+        "tags": [
+          "Colleague"
+        ],
+        "summary": "Get one notice",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Colleague"
+        ],
+        "summary": "Get one notice",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Colleague"
+        ],
+        "summary": "Get one notice",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/colleague/{id}": {
+      "get": {
+        "tags": [
+          "Colleague"
+        ],
+        "summary": "Get one notice",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The Notice ID"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      },
+
+      "delete": {
+        "tags": [
+          "Colleague"
+        ],
+        "summary": "Get one notice",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/analyze": {
+      "put": {
+        "tags": [
+          "Analyze"
+        ],
+        "summary": "Get one notice",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Analyze"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Get one notice",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/analyze/{id}": {
+      "get": {
+        "tags": [
+          "Analyze"
+        ],
+        "summary": "Get one notice",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Analyze"
+        ],
+        "summary": "Get one notice",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
                 }
               }
             }
@@ -651,7 +1527,7 @@
             "content": {}
           }
         }
-      },     
+      },
       "post": {
         "tags": [
           "Notice"
@@ -694,7 +1570,7 @@
             "content": {}
           }
         }
-      }    
+      }
     },
     "/sponsors-info": {
       "get": {
@@ -761,15 +1637,15 @@
         "type": "object",
         "required": [
           "name",
+          "role",
           "phone",
-          "password",
-          "role"
+          "password"
         ],
         "properties": {
           "name": {
             "type": "string",
             "description": "User's name",
-            "format": "name"
+            "example": "User1"
           },
           "password": {
             "type": "string",
@@ -803,14 +1679,6 @@
             "type": "string",
             "description": "User's phone"
           },
-          "birthday": {
-            "type": "string",
-            "description": "User's phone"
-          },
-          "userImgUrl": {
-            "type": "string",
-            "description": "User's phone"
-          },
           "data": {
             "type": "object",
             "properties": {
@@ -827,14 +1695,8 @@
         },
         "example": {
           "name": "One",
-          "email": "1@gmail.com",
-          "city": "Kiev",
-          "phone": 3809739345679,
-          "birthday": null,
-          "userImgUrl": null,
-          "userPets": [],
-          "ownNotices": [],
-          "favoriteNotices": [],
+          "role": "doctor",
+          "phone": "3809739345679",
           "data": {
             "accessToken": "xxxxx.yyyyy.zzzzz",
             "refreshToken": "xxxxx.yyyyy.zzzzz"
@@ -868,24 +1730,7 @@
             "type": "string",
             "description": "User's name"
           },
-          "email": {
-            "type": "string",
-            "description": "User's email",
-            "format": "email"
-          },
-          "city": {
-            "type": "string",
-            "description": "User's city"
-          },
           "phone": {
-            "type": "string",
-            "description": "User's phone"
-          },
-          "birthday": {
-            "type": "string",
-            "description": "User's phone"
-          },
-          "userImgUrl": {
             "type": "string",
             "description": "User's phone"
           },
@@ -893,18 +1738,6 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PetResponse"
-            }
-          },
-          "ownNotices": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GetOneNotice"
-            }
-          },
-          "favoriteNotices": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GetOneNotice"
             }
           },
           "data": {
@@ -923,14 +1756,8 @@
         },
         "example": {
           "name": "One",
-          "email": "1@gmail.com",
-          "city": "Kiev",
-          "phone": 3809739345679,
-          "birthday": null,
-          "userImgUrl": null,
-          "userPets": [],
-          "ownNotices": [],
-          "favoriteNotices": [],
+          "phone": "3809739345679",
+          "role": "doctor",
           "data": {
             "accessToken": "xxxxx.yyyyy.zzzzz",
             "refreshToken": "xxxxx.yyyyy.zzzzz"
@@ -961,6 +1788,70 @@
           }
         }
       },
+      "UpdateCurrentUserExperienceRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "educational institution"
+          },
+          "description": {
+            "type": "string",
+            "description": "description educational institution"
+          },
+          "start": {
+            "type": "string",
+            "description": "data start"
+          },
+          "end": {
+            "type": "string",
+            "description": "data end"
+          }
+        },
+        "example": {
+          "title": "Basic medical sciences",
+          "description": "The basic medical sciences look at the molecular, cellular, and systems organization of the human body and the biological mechanisms it uses to adapt to environmental changes and disease.",
+          "start": "2021-03-03T00:00:00.000+00:00",
+          "end": "2020-03-02T22:00:00.000+00:00"
+        }
+      },
+      "UpdateCurrentUserExperienceResponse": {
+        "type": "object",
+        "properties": {
+          "owner:": {
+            "type": "string",
+            "description": "Id owner experience"
+          },
+          "ImgUrl": {
+            "type": "string",
+            "description": "img document"
+          },
+          "title": {
+            "type": "string",
+            "description": "educational institution"
+          },
+          "description": {
+            "type": "string",
+            "description": "description educational institution"
+          },
+          "start": {
+            "type": "string",
+            "description": "data start"
+          },
+          "end": {
+            "type": "string",
+            "description": "data end"
+          }
+        },
+        "example": {
+          "owner": "642ae9da4ef91590895d8b7b",
+          "ImgUrl": "https://res.cloudinary.com/nafin13/image/upload/v1680725876/jlqv56ojibl8wjtuyg2a.png",
+          "title": "Basic medical sciences",
+          "description": "The basic medical sciences look at the molecular, cellular, and systems organization of the human body and the biological mechanisms it uses to adapt to environmental changes and disease.",
+          "start": "2021-03-03T00:00:00.000+00:00",
+          "end": "2020-03-02T22:00:00.000+00:00"
+        }
+      },
       "GetUserInfo": {
         "type": "object",
         "properties": {
@@ -984,15 +1875,107 @@
           }
         },
         "example": {
-          "name": "One",
-          "email": "1@gmail.com",
-          "city": "Kiev",
-          "phone": 3809739345679,
-          "birthday": null,
-          "userImgUrl": null,
-          "userPets": [],
-          "ownNotices": [],
-          "favoriteNotices": []
+          "_id": "642ae9da4ef91590895d8b7b",
+          "name": "Shumeiko Timur Bohdanovich",
+          "phone": "3809739345679",
+          "password": "$2b$10$qfiqCPZamB/0u1pge.8nj.Tfk5Q6YaiVkyQuv5HjTwJ4qzn3zGSy6",
+          "createdAt": "2023-04-03T14:59:38.303Z",
+          "updatedAt": "2023-04-06T11:53:40.210Z",
+          "__v": 0,
+          "role": "doctor",
+          "coast": 200,
+          "about": "Hi, I'm Shumeiko Timur Bohdanovich, a highly skilled surgeon with 8 years of experience in to surgeons. I am committed to providing the highest level of care to my patients and am dedicated to helping them achieve better health and quality of life through surgical interventions. I am passionate about my work and am constantly seeking new and innovative ways to improve patient outcomes and quality of care. Thank you for considering me as your surgeon.",
+          "specialization": "Surgeon",
+          "category": "higer",
+          "gender": "male",
+          "birthday": "2023-04-03T00:00:00.000Z",
+          "userImgUrl": "https://res.cloudinary.com/nafin13/image/upload/v1681153859/jxzajax5uftqzzyimh5r.png"
+        }
+      },
+      "GetAppointment": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "patient": {
+              "type": "string"
+            },
+            "doctor": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string"
+            }
+          }
+        },
+        "example": {
+          "_id": "642fe9e82510b50890683954",
+          "patient": "642fe9e82510b50890683954",
+          "doctor": "642ae9da4ef91590895d8b7b",
+          "date": "2001-10-02T21:00:00.000Z"
+        }
+      },
+      "GetAppointments": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "patient": {
+              "type": "string"
+            },
+            "doctor": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string"
+            }
+          }
+        },
+        "example": [
+          {
+          "_id": "642fe9e82510b50890683954",
+          "patient": "642fe9e82510b50890683954",
+          "doctor": "642ae9da4ef91590895d8b7b",
+          "date": "2001-10-02T21:00:00.000Z"
+        }
+        ]
+      },
+      "AddAppointmentReq": {
+          "type": "object",
+          "required": [
+            "opponent",
+            "date"
+          ],
+          "properties": {
+            "opponent": {
+              "type": "string",
+              "description": "opponent {id}",
+              "example": "642fe9e82510b50890683954"
+            },
+            "date": {
+              "type": "string",
+              "description": "date Appointment",
+              "example": "2002-10-02T21:00:00.000Z"
+            }
+          }
+      },
+      "AddAppointmentRes": {
+        "type": "object",
+        "properties": {
+          "acknowledged": {
+            "type": "string",
+            "example": true
+          },
+          "insertedId": {
+            "type": "string",
+            "example": "6439206309faa09eaf44c15e"
+          }
         }
       },
       "GetSponsorsInfo": {
@@ -1214,33 +2197,36 @@
         "example": {
           "success": true,
           "message": "Data found with this ID",
-          "notice":[ {
-            "_id": "63029a9e67447e95c6d80cee",
-            "type_of_pet": "shinshila",
-            "animals_photos": "https://res.cloudinary.com/nafin13/image/upload/v1661115037/ow7dsa4ifrr7ubnwqtj7.jpg",
-            "district": "shinshila",
-            "description": "shinshila",
-            "userContacts": "Kiev, Nafanya, +3.....111111",
-            "price": "12366",
-            "owner": "62ff62db76172b42dd276f3a",
-            "category": "Sell",
-            "createdAt": "2022-08-21T20:50:38.508Z",
-            "updatedAt": "2022-08-21T20:50:38.508Z",
-            "__v": 0
-          }, {
-            "_id": "63029a9e67447e95c6d81cee",
-            "type_of_pet": "shinshila1",
-            "animals_photos": "https://res.cloudinary.com/nafin13/image/upload/v1661115037/ow7dsa4ifrr7ubnwqtj7.jpg",
-            "district": "shinshila",
-            "description": "shinshila1",
-            "userContacts": "Kiev, Nafanya, +3.....111111",
-            "price": "12366",
-            "owner": "62ff62db76172b42dd276f3a",
-            "category": "Sell",
-            "createdAt": "2022-08-21T20:50:38.508Z",
-            "updatedAt": "2022-08-21T20:50:38.508Z",
-            "__v": 0
-          }]
+          "notice": [
+            {
+              "_id": "63029a9e67447e95c6d80cee",
+              "type_of_pet": "shinshila",
+              "animals_photos": "https://res.cloudinary.com/nafin13/image/upload/v1661115037/ow7dsa4ifrr7ubnwqtj7.jpg",
+              "district": "shinshila",
+              "description": "shinshila",
+              "userContacts": "Kiev, Nafanya, +3.....111111",
+              "price": "12366",
+              "owner": "62ff62db76172b42dd276f3a",
+              "category": "Sell",
+              "createdAt": "2022-08-21T20:50:38.508Z",
+              "updatedAt": "2022-08-21T20:50:38.508Z",
+              "__v": 0
+            },
+            {
+              "_id": "63029a9e67447e95c6d81cee",
+              "type_of_pet": "shinshila1",
+              "animals_photos": "https://res.cloudinary.com/nafin13/image/upload/v1661115037/ow7dsa4ifrr7ubnwqtj7.jpg",
+              "district": "shinshila",
+              "description": "shinshila1",
+              "userContacts": "Kiev, Nafanya, +3.....111111",
+              "price": "12366",
+              "owner": "62ff62db76172b42dd276f3a",
+              "category": "Sell",
+              "createdAt": "2022-08-21T20:50:38.508Z",
+              "updatedAt": "2022-08-21T20:50:38.508Z",
+              "__v": 0
+            }
+          ]
         }
       },
       "NoticeRequest": {

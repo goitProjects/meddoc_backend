@@ -8,12 +8,6 @@ const uploadCloud = require("../middlewares/uploadMiddleware.js");
 router.post("/register", UserController.userRegister);
 router.post("/login", UserController.userLogin);
 router.post("/refresh", UserController.refreshTokens);
-router.get(
-  "/update/image",
-  authMiddleware,
-  uploadCloud.single("userImgUrl"),
-  UserController.userUpdate
-);
 router.get("/logout", authMiddleware, UserController.userLogout);
 
 module.exports = router;

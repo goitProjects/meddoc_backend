@@ -9,7 +9,7 @@ module.exports = {
       if (!authorization) {
         return res.status(401).json({
           success: false,
-          message: "Please, provide a tokin in request authorization header",
+          message: "Please, provide a token in request authorization header",
         });
       }
       const [, token] = authorization.split(" ");
@@ -19,8 +19,8 @@ module.exports = {
           message: "Not authorized",
         });
       }
-      const { id } = jwt.decode(token, secret);
-      const userFind = await User.findById(id);
+      const {id}  = jwt.decode(token, secret);
+      const userFind = await User.findById(id).lean();
       if (!userFind) {
         return res.status(401).json({
           success: false,

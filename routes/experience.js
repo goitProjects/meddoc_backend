@@ -12,8 +12,8 @@ router.get('/:id',authMiddleware, ExperienceController.getExperience);
 router.patch('/:id',authMiddleware, ExperienceController.updateExperience);
 router.put('/',authMiddleware, ExperienceController.addExperience);
 router.delete('/:id',authMiddleware, ExperienceController.deleteExperience);
-router.get('/update/image',  authMiddleware,
-    uploadCloud.single("ImgUrl"),
+router.post('/update/image/:id',  authMiddleware,
+    uploadCloud.single("userImgUrl"),
     ExperienceController.updateExperience);
 
 module.exports = router;

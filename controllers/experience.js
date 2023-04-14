@@ -1,21 +1,27 @@
 const {Experience} = require("../models/Experience.model");
-
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 module.exports.getExperience = async (req, res) => {
-    console.log("getExperience: ",req.user);
+    let  experience;
     if (req?.params?.id) {
-        req.user._id = req.params.id
+        req.user._id = req.params.id;
+         experience = await Experience.findOne({_id: req.user._id})
+    } else {
+        experience = await Experience.find({owner: req.user._id})
     }
-    const experience = await Experience.find({owner: req.user._id})
+
     return res.status(200).json(experience);
 }
 
 module.exports.updateExperience = async (req, res) => {
-    const experience = await Experience.findByIdAndUpdate({_id: req.params.id},{ ...req.body }, {returnDocument: "after"})
+    console.log("req.params: ",req.params)
+    console.log("req.body: ",req.body)
+    const experience = await Experience.findByIdAndUpdate({_id: ObjectId(req.params._id)},{ ...req.body }, {returnDocument: "after"})
     return res.status(200).json(experience);
 }
 
 module.exports.addExperience = async (req, res) => {
-    const experience = await Experience.create({ owner: req.user, ...req.body} )
+    const experience = await Experience.create({ owner: req.user._id, ...req.body} )
     return res.status(200).json(experience);
 }
 
