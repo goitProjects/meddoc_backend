@@ -8,7 +8,7 @@ const ColleagueSchema = new Schema(
     }
 );
 
-const Colleague = model("AColleague", ColleagueSchema);
+const Colleague = model("colleagues", ColleagueSchema);
 module.exports = {
     Colleague
 };

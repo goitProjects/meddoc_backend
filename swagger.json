@@ -14,7 +14,7 @@
       "url": "http://localhost:3007"
     },
     {
-      "url": "https://YOU_SERVER.com/"
+      "url": "https://meddoc-backend.p.goit.global/"
     }
   ],
   "tags": [
@@ -365,7 +365,8 @@
           }
         ],
         "summary": "Update user image info",
-        "responses": {}
+        "responses": {
+        }
       }
     },
     "/info/update": {
@@ -664,7 +665,8 @@
           }
         ],
         "summary": "Update by {id} Experience image ",
-        "responses": {}
+        "responses": {
+        }
       }
     },
     "/appointment": {
@@ -690,6 +692,7 @@
               }
             }
           },
+
           "404": {
             "description": "Not found",
             "content": {}
@@ -732,6 +735,7 @@
               }
             }
           },
+
           "404": {
             "description": "Not found",
             "content": {}
@@ -773,6 +777,7 @@
               }
             }
           },
+
           "404": {
             "description": "Not found",
             "content": {}
@@ -823,6 +828,7 @@
               }
             }
           },
+
           "404": {
             "description": "Not found",
             "content": {}
@@ -862,6 +868,7 @@
               }
             }
           },
+
           "404": {
             "description": "Not found",
             "content": {}
@@ -896,6 +903,7 @@
               }
             }
           },
+
           "404": {
             "description": "Not found",
             "content": {}
@@ -937,13 +945,22 @@
             "content": {}
           }
         }
-      },
-      "patch": {
+      }
+    },
+    "/colleague/{id}": {
+      "get": {
         "tags": [
           "Colleague"
         ],
-        "summary": "Get one notice",
-        "parameters": [],
+        "summary": "Get colleague by  owner{id}",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The Notice ID"
+          }
+        ],
         "security": [
           {
             "Bearer": []
@@ -960,6 +977,7 @@
               }
             }
           },
+
           "404": {
             "description": "Not found",
             "content": {}
@@ -969,10 +987,59 @@
             "content": {}
           }
         }
-      }
-    },
-    "/colleague/{id}": {
-      "get": {
+      },
+      "patch": {
+        "tags": [
+          "Colleague"
+        ],
+        "summary": "update one Colleague by _id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The  Colleague ID"
+          }
+        ],
+        "requestBody": {
+          "description": "Update's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCurrentUserColleagueRequest"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
         "tags": [
           "Colleague"
         ],
@@ -1001,38 +1068,7 @@
               }
             }
           },
-          "404": {
-            "description": "Not found",
-            "content": {}
-          },
-          "500": {
-            "description": "Server error",
-            "content": {}
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Colleague"
-        ],
-        "summary": "Get one notice",
-        "parameters": [],
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetOneNotice"
-                }
-              }
-            }
-          },
+
           "404": {
             "description": "Not found",
             "content": {}
@@ -1161,6 +1197,447 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/notice/{id}": {
+      "get": {
+        "tags": [
+          "Notice"
+        ],
+        "summary": "Get one notice",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "The Notice ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Notice"
+        ],
+        "summary": "Get list of categories",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "The Notice ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/notice/selected": {
+      "get": {
+        "tags": [
+          "Notice"
+        ],
+        "summary": "Get list of categories",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/notice/selected/{id}": {
+      "post": {
+        "tags": [
+          "Notice"
+        ],
+        "summary": "Post selected notice",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "The Notice ID"
+          }
+        ],
+        "requestBody": {
+          "description": "Notece's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NoticeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Notice"
+        ],
+        "summary": "Delete selected notice",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "The Notice ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/pet": {
+      "post": {
+        "tags": [
+          "Pet"
+        ],
+        "summary": "Post pet",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Notece's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/pet/{id}": {
+      "delete": {
+        "tags": [
+          "Pet"
+        ],
+        "summary": "Delete selected pet",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "The Notice ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/notice": {
+      "get": {
+        "tags": [
+          "Notice"
+        ],
+        "summary": "Get list of categories",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNotice"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Notice"
+        ],
+        "summary": "Post notice",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Notece's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/sponsors-info": {
+      "get": {
+        "tags": [
+          "Sponsors-info"
+        ],
+        "summary": "Get list of sponsors",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSponsorsInfo"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/news": {
+      "get": {
+        "tags": [
+          "News"
+        ],
+        "summary": "Get list of news",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetNews"
                 }
               }
             }
@@ -1485,31 +1962,31 @@
         },
         "example": [
           {
-            "_id": "642fe9e82510b50890683954",
-            "patient": "642fe9e82510b50890683954",
-            "doctor": "642ae9da4ef91590895d8b7b",
-            "date": "2001-10-02T21:00:00.000Z"
-          }
+          "_id": "642fe9e82510b50890683954",
+          "patient": "642fe9e82510b50890683954",
+          "doctor": "642ae9da4ef91590895d8b7b",
+          "date": "2001-10-02T21:00:00.000Z"
+        }
         ]
       },
       "AddAppointmentReq": {
-        "type": "object",
-        "required": [
-          "opponent",
-          "date"
-        ],
-        "properties": {
-          "opponent": {
-            "type": "string",
-            "description": "opponent {id}",
-            "example": "642fe9e82510b50890683954"
-          },
-          "date": {
-            "type": "string",
-            "description": "date Appointment",
-            "example": "2002-10-02T21:00:00.000Z"
+          "type": "object",
+          "required": [
+            "opponent",
+            "date"
+          ],
+          "properties": {
+            "opponent": {
+              "type": "string",
+              "description": "opponent {id}",
+              "example": "642fe9e82510b50890683954"
+            },
+            "date": {
+              "type": "string",
+              "description": "date Appointment",
+              "example": "2002-10-02T21:00:00.000Z"
+            }
           }
-        }
       },
       "AddAppointmentRes": {
         "type": "object",
@@ -1519,6 +1996,14 @@
             "example": true
           },
           "insertedId": {
+            "type": "string",
+            "example": "6439206309faa09eaf44c15e"
+          }
+        }
+      },
+      "UpdateCurrentUserColleagueRequest": {
+        "properties": {
+          "colleague": {
             "type": "string",
             "example": "6439206309faa09eaf44c15e"
           }

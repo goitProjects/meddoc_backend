@@ -1,2 +1,2 @@
-# MedDoc App back-end
-Back-end for MedDoc App
+# Pets_support App back-end
+Back-end for Pets_support App
