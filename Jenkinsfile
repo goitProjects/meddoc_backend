@@ -24,6 +24,7 @@ node("nodejs"){
         env.failedBuildText = java.net.URLEncoder.encode("Build *${JOB_NAME}* FAILED.\nTime: TIME\n[Go to build](${buildUrl})", "UTF-8");
     }
     
+ 
     stage('Pre Build Notify') {
         //Send message to channel
         sendTelegramChannelMessage(
