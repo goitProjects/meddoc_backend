@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3007"
+      "url": "http://localhost:3017"
     },
     {
       "url": "https://meddoc-backend.p.goit.global/"
@@ -91,15 +91,43 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "409": {
             "description": "Email in use",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User with phone +3809739345678 already exist"
+                    }
+                  }
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       }
@@ -139,7 +167,13 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -167,11 +201,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       }
@@ -201,11 +247,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       }
@@ -238,11 +296,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       }
@@ -256,6 +326,9 @@
         "parameters": [
           {
             "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "name": "id",
             "required": true,
             "description": "The Notice ID"
@@ -283,11 +356,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       }
@@ -301,6 +386,9 @@
         "parameters": [
           {
             "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "name": "role",
             "required": true,
             "description": "The Notice role"
@@ -317,7 +405,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetUsersRole"
+                  "$ref": "#/components/schemas/GetAllUsersWhithRole"
                 }
               }
             }
@@ -328,11 +416,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       }
@@ -366,6 +466,36 @@
         ],
         "summary": "Update user image info",
         "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadImageResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -409,11 +539,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       }
@@ -443,11 +585,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       },
@@ -463,7 +617,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateCurrentUserExperienceRequest"
+                "$ref": "#/components/schemas/UpdateUserExperienceRequest"
               }
             }
           }
@@ -479,7 +633,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateCurrentUserExperienceResponse"
+                  "$ref": "#/components/schemas/UpdateUserExperienceResponse"
                 }
               }
             }
@@ -490,11 +644,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       }
@@ -508,6 +674,9 @@
         "parameters": [
           {
             "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "name": "id",
             "required": true
           }
@@ -530,11 +699,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       },
@@ -546,6 +727,9 @@
         "parameters": [
           {
             "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "name": "id",
             "required": true
           }
@@ -583,11 +767,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       },
@@ -599,6 +795,9 @@
         "parameters": [
           {
             "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "name": "id",
             "required": true
           }
@@ -621,11 +820,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       }
@@ -638,6 +849,9 @@
         "parameters": [
           {
             "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "name": "id",
             "required": true
           }
@@ -666,6 +880,36 @@
         ],
         "summary": "Update by {id} Experience image ",
         "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddAppointmentRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -692,14 +936,25 @@
               }
             }
           },
-
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       },
@@ -735,14 +990,25 @@
               }
             }
           },
-
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       }
@@ -756,6 +1022,9 @@
         "parameters": [
           {
             "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "name": "id",
             "required": true,
             "description": "The Notice ID"
@@ -777,10 +1046,15 @@
               }
             }
           },
-
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -797,6 +1071,9 @@
           {
             "in": "path",
             "name": "id",
+            "schema": {
+              "type": "string"
+            },
             "required": true,
             "description": "The Appointment ID"
           }
@@ -828,14 +1105,25 @@
               }
             }
           },
-
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       },
@@ -847,6 +1135,9 @@
         "parameters": [
           {
             "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "name": "id",
             "required": true,
             "description": "delete Appointment {id}"
@@ -868,14 +1159,25 @@
               }
             }
           },
-
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       }
@@ -903,14 +1205,19 @@
               }
             }
           },
-
           "404": {
             "description": "Not found",
             "content": {}
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       },
@@ -938,11 +1245,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       }
@@ -956,6 +1275,9 @@
         "parameters": [
           {
             "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "name": "id",
             "required": true,
             "description": "The Notice ID"
@@ -977,14 +1299,25 @@
               }
             }
           },
-
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       },
@@ -996,6 +1329,9 @@
         "parameters": [
           {
             "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "name": "id",
             "required": true,
             "description": "The  Colleague ID"
@@ -1028,14 +1364,25 @@
               }
             }
           },
-
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       },
@@ -1047,6 +1394,9 @@
         "parameters": [
           {
             "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "name": "id",
             "required": true,
             "description": "The Notice ID"
@@ -1068,14 +1418,25 @@
               }
             }
           },
-
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       }
@@ -1105,11 +1466,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       },
@@ -1137,11 +1510,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       }
@@ -1151,8 +1536,18 @@
         "tags": [
           "Analyze"
         ],
+        "parameters": [
+          {
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "name": "id",
+            "required": true,
+            "description": "The Notice ID"
+          }
+        ],
         "summary": "Get one notice",
-        "parameters": [],
         "security": [
           {
             "Bearer": []
@@ -1171,11 +1566,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
           },
           "500": {
             "description": "Server error",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
           }
         }
       },
@@ -1184,93 +1591,20 @@
           "Analyze"
         ],
         "summary": "Get one notice",
-        "parameters": [],
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetOneNotice"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {}
-          },
-          "500": {
-            "description": "Server error",
-            "content": {}
-          }
-        }
-      }
-    },
-    "/notice/{id}": {
-      "get": {
-        "tags": [
-          "Notice"
-        ],
-        "summary": "Get one notice",
         "parameters": [
           {
             "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "name": "id",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "minimum": 1
-            },
             "description": "The Notice ID"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetOneNotice"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {}
-          },
-          "500": {
-            "description": "Server error",
-            "content": {}
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Notice"
-        ],
-        "summary": "Get list of categories",
         "security": [
           {
             "Bearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "minimum": 1
-            },
-            "description": "The Notice ID"
           }
         ],
         "responses": {
@@ -1286,369 +1620,23 @@
           },
           "404": {
             "description": "Not found",
-            "content": {}
-          },
-          "500": {
-            "description": "Server error",
-            "content": {}
-          }
-        }
-      }
-    },
-    "/notice/selected": {
-      "get": {
-        "tags": [
-          "Notice"
-        ],
-        "summary": "Get list of categories",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetOneNotice"
+                  "$ref": "#/components/schemas/BadRequest"
                 }
               }
             }
           },
-          "404": {
-            "description": "Not found",
-            "content": {}
-          },
           "500": {
             "description": "Server error",
-            "content": {}
-          }
-        }
-      }
-    },
-    "/notice/selected/{id}": {
-      "post": {
-        "tags": [
-          "Notice"
-        ],
-        "summary": "Post selected notice",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "minimum": 1
-            },
-            "description": "The Notice ID"
-          }
-        ],
-        "requestBody": {
-          "description": "Notece's object",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NoticeRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetOneNotice"
+                  "$ref": "#/components/schemas/InternalServerError"
                 }
               }
             }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {}
-          },
-          "500": {
-            "description": "Server error",
-            "content": {}
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Notice"
-        ],
-        "summary": "Delete selected notice",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "minimum": 1
-            },
-            "description": "The Notice ID"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetOneNotice"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {}
-          },
-          "500": {
-            "description": "Server error",
-            "content": {}
-          }
-        }
-      }
-    },
-    "/pet": {
-      "post": {
-        "tags": [
-          "Pet"
-        ],
-        "summary": "Post pet",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "parameters": [],
-        "requestBody": {
-          "description": "Notece's object",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PetRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PetResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {}
-          },
-          "500": {
-            "description": "Server error",
-            "content": {}
-          }
-        }
-      }
-    },
-    "/pet/{id}": {
-      "delete": {
-        "tags": [
-          "Pet"
-        ],
-        "summary": "Delete selected pet",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "minimum": 1
-            },
-            "description": "The Notice ID"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PetResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {}
-          },
-          "500": {
-            "description": "Server error",
-            "content": {}
-          }
-        }
-      }
-    },
-    "/notice": {
-      "get": {
-        "tags": [
-          "Notice"
-        ],
-        "summary": "Get list of categories",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetOneNotice"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {}
-          },
-          "500": {
-            "description": "Server error",
-            "content": {}
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Notice"
-        ],
-        "summary": "Post notice",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "parameters": [],
-        "requestBody": {
-          "description": "Notece's object",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PetRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PetResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {}
-          },
-          "500": {
-            "description": "Server error",
-            "content": {}
-          }
-        }
-      }
-    },
-    "/sponsors-info": {
-      "get": {
-        "tags": [
-          "Sponsors-info"
-        ],
-        "summary": "Get list of sponsors",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetSponsorsInfo"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {}
-          },
-          "500": {
-            "description": "Server error",
-            "content": {}
-          }
-        }
-      }
-    },
-    "/news": {
-      "get": {
-        "tags": [
-          "News"
-        ],
-        "summary": "Get list of news",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetNews"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {}
-          },
-          "500": {
-            "description": "Server error",
-            "content": {}
           }
         }
       }
@@ -1717,12 +1705,16 @@
           }
         },
         "example": {
-          "name": "One",
-          "role": "doctor",
-          "phone": "3809739345679",
-          "data": {
-            "accessToken": "xxxxx.yyyyy.zzzzz",
-            "refreshToken": "xxxxx.yyyyy.zzzzz"
+          "success": true,
+          "message": "Successfully created new user. You can Login",
+          "user": {
+            "name": "Shumeiko Timur Bohdanovich",
+            "phone": "+3809739345578",
+            "role": "doctor",
+            "data": {
+              "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2ZkNjdhMGU1YWRjY2JmNGViM2UxZCIsImlhdCI6MTY4MTkwNTI3NSwiZXhwIjoxNjgxOTc3Mjc1fQ.K2wghJEPvKBk-8zuOW1P05lwxucPH6obuSgkOiQpY1s",
+              "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2ZkNjdhMGU1YWRjY2JmNGViM2UxZCIsImlhdCI6MTY4MTkwNTI3NSwiZXhwIjoxNjg0NDk3Mjc1fQ.T2FwTxqST4pXXcB1hCj8NGEO_idcAsRxZA103LzQmP4"
+            }
           }
         }
       },
@@ -1757,12 +1749,6 @@
             "type": "string",
             "description": "User's phone"
           },
-          "userPets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PetResponse"
-            }
-          },
           "data": {
             "type": "object",
             "properties": {
@@ -1778,12 +1764,13 @@
           }
         },
         "example": {
-          "name": "One",
-          "phone": "3809739345679",
+          "id": "643fcb52024091f380863625",
+          "name": "Shumeiko Timur Bohdanovich",
+          "phone": "+3809739345678",
           "role": "doctor",
           "data": {
-            "accessToken": "xxxxx.yyyyy.zzzzz",
-            "refreshToken": "xxxxx.yyyyy.zzzzz"
+            "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2ZjYjUyMDI0MDkxZjM4MDg2MzYyNSIsImlhdCI6MTY4MTkwMjQ3MywiZXhwIjoxNjgzNjMwNDczfQ.BH_Pn9E1ppEQQfHCgX2ThqHw4R_GFtLyv1Y-4Qo1ttQ",
+            "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2ZjYjUyMDI0MDkxZjM4MDg2MzYyNSIsImlhdCI6MTY4MTkwMjQ3MywiZXhwIjoxNjg0NDk0NDczfQ.3KDPpgXwl892kEFJSsTH5AJRWgTwUmR1SpJ2UOFhkv8"
           }
         }
       },
@@ -1805,13 +1792,138 @@
           }
         },
         "example": {
+          "status": "success",
           "data": {
-            "accessToken": "xxxxx.yyyyy.zzzzz",
-            "refreshToken": "xxxxx.yyyyy.zzzzz"
+            "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2ZjYjUyMDI0MDkxZjM4MDg2MzYyNSIsImlhdCI6MTY4MTkwNjM3MSwiZXhwIjoxNjgxOTc4MzcxfQ.MRj8WEF1HstHop6N6M8j6ChQApT7hqnZjzJo4dCgvz0",
+            "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2ZjYjUyMDI0MDkxZjM4MDg2MzYyNSIsImlhdCI6MTY4MTkwNjM3MSwiZXhwIjoxNjg0NDk4MzcxfQ.Gu80GJyOGUrrS_a690wlM6fmYwW-OU1G8barf4maYF4"
           }
         }
       },
-      "UpdateCurrentUserExperienceRequest": {
+      "GetUserInfo": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "User's name"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              },
+              "balance": {
+                "type": "number",
+                "description": "User's balance"
+              }
+            }
+          }
+        },
+        "example": {
+          "_id": "642ae9da4ef91590895d8b7b",
+          "name": "Shumeiko Timur Bohdanovich",
+          "phone": "3809739345679",
+          "role": "doctor",
+          "coast": 200,
+          "about": "Hi, I'm Shumeiko Timur Bohdanovich, a highly skilled surgeon with 8 years of experience in to surgeons. I am committed to providing the highest level of care to my patients and am dedicated to helping them achieve better health and quality of life through surgical interventions. I am passionate about my work and am constantly seeking new and innovative ways to improve patient outcomes and quality of care. Thank you for considering me as your surgeon.",
+          "specialization": "Surgeon",
+          "category": "higer",
+          "gender": "male",
+          "birthday": "2023-04-03",
+          "userImgUrl": "https://res.cloudinary.com/nafin13/image/upload/v1681153859/jxzajax5uftqzzyimh5r.png"
+        }
+      },
+      "GetAllUsersWhithRole": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "patient": {
+              "type": "string"
+            },
+            "doctor": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string"
+            },
+            "rating": {
+              "type": "string"
+            }
+          }
+        },
+        "example": [
+          {
+            "_id": "643fcb52024091f380863625",
+            "name": "Shumeiko Timur Bohdanovich",
+            "phone": "+3809739345678",
+            "role": "doctor"
+          },
+          {
+            "_id": "643fd67a0e5adccbf4eb3e1d",
+            "name": "Shumeiko Timur Bohdanovich",
+            "phone": "+3809739345578",
+            "role": "doctor",
+            "coast": 200,
+            "about": "Hi, I'm Shumeiko Timur Bohdanovich, a highly skilled surgeon with 8 years of experience in to surgeons. I am committed to providing the highest level of care to my patients and am dedicated to helping them achieve better health and quality of life through surgical interventions. I am passionate about my work and am constantly seeking new and innovative ways to improve patient outcomes and quality of care. Thank you for considering me as your surgeon.",
+            "specialization": "Surgeon",
+            "category": "higer",
+            "gender": "male",
+            "birthday": "2023-04-03",
+            "userImgUrl": "https://res.cloudinary.com/nafin13/image/upload/v1681153859/jxzajax5uftqzzyimh5r.png",
+            "rating": []
+          }
+        ]
+      },
+      "UploadImageResponse": {
+        "type": "object",
+        "properties": {
+          "coast": {
+            "type": "string"
+          },
+          "about": {
+            "type": "string"
+          },
+          "specialization": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "birthday": {
+            "type": "string"
+          },
+          "userImgUrl": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "_id": "643fd67a0e5adccbf4eb3e1d",
+          "name": "Shumeiko Timur Bohdanovich",
+          "phone": "+3809739345578",
+          "role": "doctor",
+          "coast": 200,
+          "about": "Hi, I'm Shumeiko Timur Bohdanovich, a highly skilled surgeon with 8 years of experience in to surgeons. I am committed to providing the highest level of care to my patients and am dedicated to helping them achieve better health and quality of life through surgical interventions. I am passionate about my work and am constantly seeking new and innovative ways to improve patient outcomes and quality of care. Thank you for considering me as your surgeon.",
+          "specialization": "Surgeon",
+          "category": "higer",
+          "gender": "male",
+          "birthday": "2023-04-03",
+          "userImgUrl": "https://res.cloudinary.com/nafin13/image/upload/v1681153859/jxzajax5uftqzzyimh5r.png",
+          "rating": []
+        }
+      },
+      "UpdateUserExperienceRequest": {
         "type": "object",
         "properties": {
           "title": {
@@ -1838,7 +1950,7 @@
           "end": "2020-03-02T22:00:00.000+00:00"
         }
       },
-      "UpdateCurrentUserExperienceResponse": {
+      "UpdateUserExperienceResponse": {
         "type": "object",
         "properties": {
           "owner:": {
@@ -1873,46 +1985,6 @@
           "description": "The basic medical sciences look at the molecular, cellular, and systems organization of the human body and the biological mechanisms it uses to adapt to environmental changes and disease.",
           "start": "2021-03-03T00:00:00.000+00:00",
           "end": "2020-03-02T22:00:00.000+00:00"
-        }
-      },
-      "GetUserInfo": {
-        "type": "object",
-        "properties": {
-          "user": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "User's name"
-              },
-              "email": {
-                "type": "string",
-                "description": "User's email",
-                "format": "email"
-              },
-              "balance": {
-                "type": "number",
-                "description": "User's balance"
-              }
-            }
-          }
-        },
-        "example": {
-          "_id": "642ae9da4ef91590895d8b7b",
-          "name": "Shumeiko Timur Bohdanovich",
-          "phone": "3809739345679",
-          "password": "$2b$10$qfiqCPZamB/0u1pge.8nj.Tfk5Q6YaiVkyQuv5HjTwJ4qzn3zGSy6",
-          "createdAt": "2023-04-03T14:59:38.303Z",
-          "updatedAt": "2023-04-06T11:53:40.210Z",
-          "__v": 0,
-          "role": "doctor",
-          "coast": 200,
-          "about": "Hi, I'm Shumeiko Timur Bohdanovich, a highly skilled surgeon with 8 years of experience in to surgeons. I am committed to providing the highest level of care to my patients and am dedicated to helping them achieve better health and quality of life through surgical interventions. I am passionate about my work and am constantly seeking new and innovative ways to improve patient outcomes and quality of care. Thank you for considering me as your surgeon.",
-          "specialization": "Surgeon",
-          "category": "higer",
-          "gender": "male",
-          "birthday": "2023-04-03T00:00:00.000Z",
-          "userImgUrl": "https://res.cloudinary.com/nafin13/image/upload/v1681153859/jxzajax5uftqzzyimh5r.png"
         }
       },
       "GetAppointment": {
@@ -1962,31 +2034,31 @@
         },
         "example": [
           {
-          "_id": "642fe9e82510b50890683954",
-          "patient": "642fe9e82510b50890683954",
-          "doctor": "642ae9da4ef91590895d8b7b",
-          "date": "2001-10-02T21:00:00.000Z"
-        }
+            "_id": "642fe9e82510b50890683954",
+            "patient": "642fe9e82510b50890683954",
+            "doctor": "642ae9da4ef91590895d8b7b",
+            "date": "2001-10-02T21:00:00.000Z"
+          }
         ]
       },
       "AddAppointmentReq": {
-          "type": "object",
-          "required": [
-            "opponent",
-            "date"
-          ],
-          "properties": {
-            "opponent": {
-              "type": "string",
-              "description": "opponent {id}",
-              "example": "642fe9e82510b50890683954"
-            },
-            "date": {
-              "type": "string",
-              "description": "date Appointment",
-              "example": "2002-10-02T21:00:00.000Z"
-            }
+        "type": "object",
+        "required": [
+          "opponent",
+          "date"
+        ],
+        "properties": {
+          "opponent": {
+            "type": "string",
+            "description": "opponent {id}",
+            "example": "642fe9e82510b50890683954"
+          },
+          "date": {
+            "type": "string",
+            "description": "date Appointment",
+            "example": "2002-10-02T21:00:00.000Z"
           }
+        }
       },
       "AddAppointmentRes": {
         "type": "object",
@@ -2007,82 +2079,6 @@
             "type": "string",
             "example": "6439206309faa09eaf44c15e"
           }
-        }
-      },
-      "GetSponsorsInfo": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "title": {
-              "type": "string"
-            },
-            "url": {
-              "type": "string"
-            },
-            "addressUrl": {
-              "type": "string"
-            },
-            "address": {
-              "type": "string"
-            },
-            "workDays": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "isOpen": {
-                    "type": "boolean"
-                  },
-                  "from": {
-                    "type": "string"
-                  },
-                  "to": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "example": {
-          "title": "some text....",
-          "url": "https://www.....",
-          "addressUrl": "https://.",
-          "address": "some text....",
-          "workDays": [
-            {
-              "isOpen": true,
-              "from": "11:00",
-              "to": "16:00"
-            }
-          ]
-        }
-      },
-      "GetNews": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "title": {
-              "type": "string"
-            },
-            "url": {
-              "type": "string"
-            },
-            "description": {
-              "type": "string"
-            },
-            "date": {
-              "type": "string"
-            }
-          }
-        },
-        "example": {
-          "title": "some text....",
-          "url": "https://www.....",
-          "description": "some text....",
-          "date": "2022-08-12T00:00:00.000Z"
         }
       },
       "GetAllNotice": {
@@ -2260,290 +2256,35 @@
           ]
         }
       },
-      "NoticeRequest": {
+      "BadRequest": {
         "type": "object",
         "properties": {
-          "success": {
-            "type": "boolean"
-          },
           "message": {
-            "type": "string"
-          },
-          "serSelectedNotices": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "_id": {
-                  "type": "string"
-                },
-                "type_of_pet": {
-                  "type": "string"
-                },
-                "animals_photos": {
-                  "type": "string"
-                },
-                "district": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "userContacts": {
-                  "type": "string"
-                },
-                "price": {
-                  "type": "string"
-                },
-                "owner": {
-                  "type": "string"
-                },
-                "category": {
-                  "type": "string"
-                },
-                "createdAt": {
-                  "type": "string"
-                },
-                "updatedAt": {
-                  "type": "string"
-                },
-                "__v": {
-                  "type": "number"
-                }
-              }
-            }
-          },
-          "category": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "type": "string",
+            "example": "User not found"
           }
         },
-        "example": {
-          "success": true,
-          "userSelectedNotices": {
-            "_id": "63029a9e67447e95c6d80cee",
-            "type_of_pet": "shinshila",
-            "animals_photos": "https://res.cloudinary.com/nafin13/image/upload/v1661115037/ow7dsa4ifrr7ubnwqtj7.jpg",
-            "district": "shinshila",
-            "description": "shinshila",
-            "userContacts": "Kiev, Nafanya, +3.....111111",
-            "price": "12366",
-            "owner": "62ff62db76172b42dd276f3a",
-            "category": "Sell",
-            "createdAt": "2022-08-21T20:50:38.508Z",
-            "updatedAt": "2022-08-21T20:50:38.508Z",
-            "__v": 0
-          }
-        }
+        "description": "Bad Request"
       },
-      "UpdateUserRequest": {
+      "InternalServerError": {
         "type": "object",
         "properties": {
-          "success": {
-            "type": "boolean"
-          },
           "message": {
-            "type": "string"
-          },
-          "serSelectedNotices": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "_id": {
-                  "type": "string"
-                },
-                "type_of_pet": {
-                  "type": "string"
-                },
-                "animals_photos": {
-                  "type": "string"
-                },
-                "district": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "userContacts": {
-                  "type": "string"
-                },
-                "price": {
-                  "type": "string"
-                },
-                "owner": {
-                  "type": "string"
-                },
-                "category": {
-                  "type": "string"
-                },
-                "createdAt": {
-                  "type": "string"
-                },
-                "updatedAt": {
-                  "type": "string"
-                },
-                "__v": {
-                  "type": "number"
-                }
-              }
-            }
-          },
-          "category": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "type": "string",
+            "example": "Internal Server Error..."
           }
         },
-        "example": {
-          "birthday": "2010-04-16",
-          "city": "Mariupol",
-          "phone": "+380971234567",
-          "userImgUrl": "image.jpg"
-        }
+        "description": "Internal Server Error"
       },
-      "UpdateUserResponse": {
+      "ServiceUnavailable": {
         "type": "object",
         "properties": {
-          "status": {
-            "type": "string"
-          },
-          "user": {
-            "$ref": "#/components/schemas/GetUserInfo"
-          }
-        },
-        "example": {
-          "status": "success",
-          "user": {
-            "_id": "62ff62db76172b42dd276f3a",
-            "name": "Nafanya",
-            "email": "test@google.com",
-            "password": "$2b$10$NWMjWI/oTY62MhPjA.kYMuum6IOZRSab0.4RQV18jPKmWq0w.zrnm",
-            "createdAt": "2022-08-19T10:15:55.350Z",
-            "updatedAt": "2022-08-21T19:10:18.219Z",
-            "__v": 0,
-            "birthday": "2010-04-16",
-            "city": "Mariupol",
-            "phone": "+380971234567",
-            "userImgUrl": "https://res.cloudinary.com/nafin13/image/upload/v1661109019/gc4lfdok6mmzc51acxsi.jpg",
-            "userPets": [
-              "6301ce3d86e6a083b7498ca2",
-              "6301cf6aef11bdf5b0f34cae",
-              "630282faedee5dcf51e15c78"
-            ],
-            "userNotices": [
-              "6302828cedee5dcf51e15c72"
-            ]
-          }
-        }
-      },
-      "PetRequest": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
           "message": {
-            "type": "string"
-          },
-          "serSelectedNotices": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "birthdate": {
-                  "type": "string"
-                },
-                "breed": {
-                  "type": "string"
-                },
-                "avatarURL": {
-                  "type": "string"
-                },
-                "comments": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "category": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "type": "string",
+            "example": "Service Unavailable..."
           }
         },
-        "example": {
-          "name": "Zuza11111",
-          "birthdate": "2018-04-13",
-          "breed": "kvolik1",
-          "avatarURL": "image.jpg",
-          "comments": "it is kvolik1"
-        }
-      },
-      "PetResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string"
-          },
-          "pet": {
-            "type": "object",
-            "properties": {
-              "_id": {
-                "type": "string"
-              },
-              "owner": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "birthdate": {
-                "type": "string"
-              },
-              "breed": {
-                "type": "string"
-              },
-              "avatarURL": {
-                "type": "string"
-              },
-              "comments": {
-                "type": "string"
-              },
-              "createdAt": {
-                "type": "string"
-              },
-              "updatedAt": {
-                "type": "string"
-              },
-              "__v": {
-                "type": "number"
-              }
-            }
-          }
-        },
-        "example": {
-          "success": true,
-          "pet": {
-            "owner": "62ff62db76172b42dd276f3a",
-            "name": "Zuza11111",
-            "birthdate": "2018-04-13",
-            "breed": "kvolik1",
-            "avatarURL": "https://res.cloudinary.com/nafin13/image/upload/v1661108986/lwxrkglps5dmaa2xxoiv.jpg",
-            "comments": "it is kvolik1",
-            "_id": "630282faedee5dcf51e15c78",
-            "createdAt": "2022-08-21T19:09:46.069Z",
-            "updatedAt": "2022-08-21T19:09:46.069Z",
-            "__v": 0
-          }
-        }
+        "description": "Service Unavailable"
       }
     },
     "securitySchemes": {
