@@ -3,13 +3,17 @@ const mongoose = require("mongoose");
 
 const AppointmentSchema = new Schema(
     {
-        patient: mongoose.Types.ObjectId,
-        doctor:  mongoose.Types.ObjectId,
+        patient: { type: mongoose.Types.ObjectId,
+            ref: "user"
+        },
+        doctor:  { type: mongoose.Types.ObjectId,
+            ref: "user"
+        },
         date: Date,
     }
 );
 
-const Appointment = model("Appointment", AppointmentSchema);
+const Appointment = model("appointment", AppointmentSchema);
 module.exports = {
     Appointment
 };

@@ -39,6 +39,8 @@ const UserSchema = new Schema(
             required: [true, "Role (patient/doctor) is required"],
         },
         userImgUrl: String,
+        accessToken: String,
+        refreshToken: String,
     },
 );
 
@@ -104,7 +106,7 @@ UserSchema.methods.toWeb = function () {
     return json;
 };
 
-const User = model("User", UserSchema);
+const User = model("user", UserSchema);
 
 module.exports = {
     User,

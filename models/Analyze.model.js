@@ -3,8 +3,12 @@ const mongoose = require("mongoose");
 
 const AnalyzeSchema = new Schema(
     {
-        owner:  mongoose.Types.ObjectId,
-        doctor:  mongoose.Types.ObjectId,
+        owner:  { type: mongoose.Types.ObjectId,
+            ref: "user"
+        },
+        doctor:  { type: mongoose.Types.ObjectId,
+            ref: "user"
+        },
         description: String,
         result: String,
         preview: String,
@@ -15,7 +19,7 @@ const AnalyzeSchema = new Schema(
     }
 );
 
-const Analyze = model("Analyze", AnalyzeSchema);
+const Analyze = model("analyze", AnalyzeSchema);
 module.exports = {
     Analyze
 };

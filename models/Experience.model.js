@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 
 const ExperienceSchema = new Schema(
     {
-        owner: mongoose.Types.ObjectId,
+        owner: { type: mongoose.Types.ObjectId,
+            ref: "user"
+        },
         ImgUrl: String,
         title: String,
         description: String,
@@ -12,7 +14,7 @@ const ExperienceSchema = new Schema(
 
     })
 
-const Experience = model("Experience", ExperienceSchema);
+const Experience = model("experience", ExperienceSchema);
 module.exports = {
     Experience
 };
