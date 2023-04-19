@@ -20,7 +20,9 @@ module.exports = {
         });
       }
       const {id}  = jwt.decode(token, secret);
+
       const userFind = await User.findById(id,{ __v:0, password:0}).lean();
+    
       if (!userFind) {
         return res.status(401).json({
           success: false,
@@ -34,7 +36,7 @@ module.exports = {
           message: "Token is expired",
         });
       }
-
+   
       req.user = userFind;
       next();
     } catch (error) {

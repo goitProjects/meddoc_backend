@@ -31,7 +31,7 @@ module.exports.getRoleAll = async (req, res) => {
     },
     {
       $lookup: {
-        from: "userInfo",
+        from: "userinfos",
         localField: "_id",
         foreignField: "owner",
         as: "user_info",
@@ -40,7 +40,7 @@ module.exports.getRoleAll = async (req, res) => {
     {
       $replaceRoot: { newRoot: { $mergeObjects: [ { $arrayElemAt: [ "$user_info", 0 ] }, "$$ROOT" ] } }
    },
-   { $project: { user_info: 0,  __v:0, password:0} }
+   { $project: { user_info: 0,  __v:0, password:0, accessToken:0, refreshToken:0} }
   ]);
   return res.status(200).json(users);
 };
@@ -50,21 +50,21 @@ module.exports.updateInfo = async (req, res) => {
     req.body.userImgUrl = req.file.path;
   }
   let info = await UserInfo.findOne({ owner: ObjectId(req.user._id) }).lean();
-  // console.log("info: ",info)
   if (info) {
     info = await UserInfo.findOneAndUpdate(
-      { owner: ObjectId(req.user._id) },
+      { owner: req.user._id },
       { ...req.body },
       { returnDocument: "after" }
     );
   } else {
     info = await UserInfo.create({
-      owner: ObjectId(req.user._id),
+      owner: req.user._id,
       ...req.body,
     });
   }
+  const {_id, name, phone, role} = req.user;
   const {coast, about, specialization, category, gender, birthday, userImgUrl, rating}= info
-  return res.status(200).json({coast, about, specialization, category, gender, birthday, userImgUrl, rating});
+  return res.status(200).json({_id, name, phone, role, coast, about, specialization, category, gender, birthday, userImgUrl, rating});
 };
 
 module.exports.deleteInfo = async (req, res) => {
@@ -72,3 +72,23 @@ module.exports.deleteInfo = async (req, res) => {
   const info = await Info.findByIdAndDelete({ _id: req.params.id });
   return res.status(200).json(info);
 };
+
+module.exports.updateRating = async (req, res) => {
+  let info = await UserInfo.findOne({ owner: ObjectId(req.user._id) }).lean();
+  if (info) {
+    info = await UserInfo.findOneAndUpdate(
+      { owner: req.user._id },
+      { $push: { rating: req.body.rating } },
+      { returnDocument: "after" }
+    );
+  } else {
+    info = await UserInfo.create({
+      owner: req.user._id,
+      rating: [req.body.rating],
+    });
+  }
+  const {_id, name, phone, role} = req.user;
+  const {coast, about, specialization, category, gender, birthday, userImgUrl, rating}= info
+  return res.status(200).json({_id, name, phone, role, coast, about, specialization, category, gender, birthday, userImgUrl, rating});
+};
+

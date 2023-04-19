@@ -13,5 +13,5 @@ router.put('/update/image',authMiddleware,
     uploadCloud.single("userImgUrl"),
     InfoController.updateInfo);
 router.patch('/update',authMiddleware, InfoController.updateInfo);
-
+router.patch('/update/rating',authMiddleware, InfoController.updateRating);
 module.exports = router;
