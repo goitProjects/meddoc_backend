@@ -1,8 +1,8 @@
 {
-  "name": "Back-end for Pets_support App",
+  "name": "App",
   "version": "1.0.0",
   "main": "server.js",
-  "repository": "===",
+  "repository": "",
   "author": "NadyaHristuk",
   "license": "MIT",
   "scripts": {
